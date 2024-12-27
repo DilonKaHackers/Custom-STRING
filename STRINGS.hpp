@@ -4,7 +4,6 @@
 class STRING {
 private:
     char* charArray;
-
     int CalcLength(const char* theString) const;
 
 public:
@@ -16,6 +15,16 @@ public:
     void replace(int pos, int len, const char* replacement);
     void erase(int pos, int len);
     int length() const;
+    void reverse();
+    void toUpperCase();
+    void toLowerCase();
+    void trim();
+    STRING* split(char delimiter, int& count) const;
+    void replaceAll(const char* target, const char* replacement);
+    bool startsWith(const char* prefix) const;
+    bool endsWith(const char* suffix) const;
+    int count(char character) const;
+    int count(const char* substring) const;
     void print() const;
 };
 
