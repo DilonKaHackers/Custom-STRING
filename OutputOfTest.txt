@@ -1,0 +1,18 @@
+Original String: Hello, World!
+Length of str1: 13
+Substring of str1 from position 7 with length 5: World
+After inserting ' beautiful' at position 5: Hello beautiful, World!
+After replacing 'beautiful' with 'awesome': Hello awesome, World!
+After erasing 7 characters from position 7: Hello, World!
+After reversing the string: !dlroW ,olleH
+After converting to uppercase: !DLROW ,OLLEH
+After converting to lowercase: !dlrow ,olleh
+After trimming str2: Trim me!
+Split str1 by space (2 parts):
+!dlrow
+,olleh
+After replacing 'me' with 'you': !dlrow ,olleh
+Does str1 start with 'hello'? No
+Does str1 end with 'you'? No
+Count of 'o' in str1: 2
+Count of 'lo' in str1: 1
