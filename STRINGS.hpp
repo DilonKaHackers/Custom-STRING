@@ -7,9 +7,11 @@ private:
     int CalcLength(const char* theString) const;
 
 public:
+    //constructor,destructor
     STRING(const char* theString);
     STRING();
     ~STRING();
+    //functions
     STRING substr(int pos, int len) const;
     void insert(int pos, const char* toInsert);
     void replace(int pos, int len, const char* replacement);
