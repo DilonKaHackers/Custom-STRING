@@ -1,4 +1,4 @@
-#ifdef STRING_HPP
+#ifndef STRING_HPP
 #define STRING_HPP
 
 #include <iostream>
@@ -18,7 +18,7 @@ private:
 
 public:
     // Constructor and Destructor
-    String_(const char* theString) {
+    String(const char* theString) {
         int len = CalcLength(theString);
         charArray = new char[len + 1];
         for (int i = 0; i < len; i++) {
@@ -27,14 +27,14 @@ public:
         charArray[len] = '\0';
     }
 
-    String_() : charArray(nullptr) {}
+    String() : charArray(nullptr) {}
 
-    ~String_() {
+    ~String() {
         delete[] charArray;
     }
 
     // Functions
-    String_ substr(int pos, int len) const {
+    String substr(int pos, int len) const {
         if (pos < 0 || pos >= CalcLength(charArray) || len < 0) {
             throw out_of_range("Invalid position or length");
         }
@@ -47,7 +47,7 @@ public:
         }
         subArray[newLen] = '\0';
 
-        return String_(subArray);
+        return String(subArray);
     }
 
     void insert(int pos, const char* toInsert) {
