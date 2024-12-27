@@ -92,6 +92,136 @@ int STRING::length() const {
     return CalcLength(charArray);
 }
 
+void STRING::reverse() {
+    int len = length();
+    for (int i = 0; i < len / 2; i++) {
+        char temp = charArray[i];
+        charArray[i] = charArray[len - 1 - i];
+        charArray[len - 1 - i] = temp;
+    }
+}
+
+void STRING::toUpperCase() {
+    for (int i = 0; i < length(); i++) {
+        if (charArray[i] >= 'a' && charArray[i] <= 'z') {
+            charArray[i] -= 32;
+        }
+    }
+}
+
+void STRING::toLowerCase() {
+    for (int i = 0; i < length(); i++) {
+        if (charArray[i] >= 'A' && charArray[i] <= 'Z') {
+            charArray[i] += 32;
+        }
+    }
+}
+
+void STRING::trim() {
+    int start = 0, end = length() - 1;
+    while (charArray[start] == ' ' && start < end) {
+        start++;
+    }
+    while (charArray[end] == ' ' && end > start) {
+        end--;
+    }
+    int newLength = end - start + 1;
+
+    char* newArray = new char[newLength + 1];
+    for (int i = 0; i < newLength; i++) {
+        newArray[i] = charArray[start + i];
+    }
+    newArray[newLength] = '\0';
+
+    delete[] charArray;
+    charArray = newArray;
+}
+
+STRING* STRING::split(char delimiter, int& count) const {
+    count = 1;
+    for (int i = 0; i < length(); i++) {
+        if (charArray[i] == delimiter) count++;
+    }
+
+    STRING* substrings = new STRING[count];
+    int start = 0, idx = 0;
+
+    for (int i = 0; i <= length(); i++) {
+        if (charArray[i] == delimiter || charArray[i] == '\0') {
+            substrings[idx++] = substr(start, i - start);
+            start = i + 1;
+        }
+    }
+
+    return substrings;
+}
+
+void STRING::replaceAll(const char* target, const char* replacement) {
+    int targetLen = CalcLength(target);
+    int replaceLen = CalcLength(replacement);
+
+    for (int i = 0; i <= length() - targetLen; i++) {
+        bool match = true;
+        for (int j = 0; j < targetLen; j++) {
+            if (charArray[i + j] != target[j]) {
+                match = false;
+                break;
+            }
+        }
+        if (match) {
+            erase(i, targetLen);
+            insert(i, replacement);
+            i += replaceLen - 1;
+        }
+    }
+}
+
+bool STRING::startsWith(const char* prefix) const {
+    int prefixLen = CalcLength(prefix);
+    if (prefixLen > length()) return false;
+    for (int i = 0; i < prefixLen; i++) {
+        if (charArray[i] != prefix[i]) return false;
+    }
+    return true;
+}
+
+bool STRING::endsWith(const char* suffix) const {
+    int suffixLen = CalcLength(suffix);
+    int strLen = length();
+    if (suffixLen > strLen) return false;
+    for (int i = 0; i < suffixLen; i++) {
+        if (charArray[strLen - suffixLen + i] != suffix[i]) return false;
+    }
+    return true;
+}
+
+int STRING::count(char character) const {
+    int count = 0;
+    for (int i = 0; i < length(); i++) {
+        if (charArray[i] == character) count++;
+    }
+    return count;
+}
+
+int STRING::count(const char* substring) const {
+    int substringLen = CalcLength(substring);
+    int occurrences = 0;
+
+    for (int i = 0; i <= length() - substringLen; i++) {
+        bool match = true;
+        for (int j = 0; j < substringLen; j++) {
+            if (charArray[i + j] != substring[j]) {
+                match = false;
+                break;
+            }
+        }
+        if (match) occurrences++;
+    }
+
+    return occurrences;
+}
+
+
 void STRING::print() const {
     if (charArray) {
         cout << charArray << endl;
